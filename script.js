@@ -9,6 +9,19 @@ var specialChr = [" ", "!", '"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",
 
 // Write password to the #password input
 function writePassword() {
+  var numberofCharacters = prompt("How many characters would you like your password to contain? \n(Minimum: 8, Maximum: 128)")
+  if (numberofCharacters < 129 && numberofCharacters > 7){
+    alert("Good job doing math");
+    console.log("You want " + numberofCharacters + " characters.");
+    return (numberofCharacters);
+  } else if (numberofCharacters < 8) {
+    alert("Your Password needs to contain at least 8 characters.");
+  } else if (numberofCharacters > 128) {
+    alert("Your Password needs to contain 128 or fewer characters.");
+  } else {
+    alert("Invalid Input")
+  }
+
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
@@ -16,5 +29,10 @@ function writePassword() {
 
 }
 
+//Generate a password using selected characters and length
+function generatePassword() {
+  console.log("Ran generatePassword")
+}
+
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+document.getElementById("generate").addEventListener("click", writePassword);
