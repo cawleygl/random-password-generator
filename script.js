@@ -32,12 +32,11 @@ function writePassword() {
   //if the user enters a number between 8 and 128
   if (numberofCharacters < 129 && numberofCharacters > 7){
     var numberofCharacters = Math.round(numberofCharacters);
-    console.log(numberofCharacters)
 
-    var specialIf = confirm("Would you like to include special characters? Click OK to confirm.");
-    var numbersIf = confirm("Would you like to include numbers? Click OK to confirm.");
-    var lowercaseIf = confirm("Would you like to include lowercase letters? Click OK to confirm.");
-    var capitalIf = confirm("Would you like to include capital letters? Click OK to confirm.");
+    var specialIf = confirm("(1/4) Would you like to include special characters? Click OK to confirm.");
+    var numbersIf = confirm("(2/4) Would you like to include numbers? Click OK to confirm.");
+    var lowercaseIf = confirm("(3/4) Would you like to include lowercase letters? Click OK to confirm.");
+    var capitalIf = confirm("(4/4) Would you like to include capital letters? Click OK to confirm.");
 
     var passwordChr = []
     var password = []
@@ -46,42 +45,36 @@ function writePassword() {
     if (specialIf === false && numbersIf === false && lowercaseIf === false && capitalIf === false) {
       alert("Please select at least one type of character to include in your Password.");
       return
-    }
-
+    
+    } else {
     //Concat special character array into passwordChr array if the user confirmed special characters
     if (specialIf === true) {
       var passwordChr = passwordChr.concat(specialChr);
-      console.log("Pass 1: " + passwordChr)
-
     }
 
     //Concat number array into passwordChr array if the user confirmed numbers
     if (numbersIf === true) {
       var passwordChr = passwordChr.concat(numbersChr);
-      console.log("Pass 2: " + passwordChr)
-
     }
     
     //Concat lowercase letter array into passwordChr array if the user confirmed lowercase letters
     if (lowercaseIf === true) {
       var passwordChr = passwordChr.concat(lowercaseChr);
-      console.log("Pass 3: " + passwordChr)
-
     }
 
     //Concat capital letter array into passwordChr array if the user confirmed capital letters
     if (capitalIf === true) {
       var passwordChr = passwordChr.concat(capitalChr);
-      console.log("Pass 4: " + passwordChr)
-
     }
-  
+
+    for (i = 0; i < numberofCharacters; i++) {
+      password.push(passwordChr[Math.floor(Math.random() * passwordChr.length)]);
+    }
+  }
+  console.log(passwordChr)
+  console.log(password)
 }
 }
-
-var passwordText = document.querySelector("#password");
-passwordText.value = password;
-
 
 // Add event listener to generate button
 document.getElementById("generate").addEventListener("click", writePassword);
