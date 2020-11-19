@@ -1,6 +1,9 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+// Add event listener to generate button
+document.getElementById("generate").addEventListener("click", writePassword);
+
 //Arrays of characters to include in passwords
 var specialChr = [" ", "!", '"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "}", "|", '{', "~"]
 var numbersChr = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
@@ -71,10 +74,10 @@ function writePassword() {
       password.push(passwordChr[Math.floor(Math.random() * passwordChr.length)]);
     }
   }
-  console.log(passwordChr)
-  console.log(password)
-}
-}
+  
+  //Access text box in html, join the password array into one string, and write the new password over the placeholder text
+  var passwordText = document.querySelector("#password");
+  passwordText.value = password.join("");
 
-// Add event listener to generate button
-document.getElementById("generate").addEventListener("click", writePassword);
+}
+}
