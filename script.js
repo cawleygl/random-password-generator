@@ -24,7 +24,7 @@ function writePassword() {
   }
   
   //if the user enters a string, boolean, or null
-  if (typeof(numberofCharacters) == "string" || typeof(numberofCharacters) == "boolean" || typeof(numberofCharacters) == "object") {
+  if (isNaN(numberofCharacters) === true) {
     alert("Invalid Input");
     return
   }
@@ -38,16 +38,18 @@ function writePassword() {
     var numbersIf = confirm("Would you like to include numbers? Click OK to confirm");
     var lowercaseIf = confirm("Would you like to include lowercase letters? Click OK to confirm");
     var capitalIf = confirm("Would you like to include capital letters? Click OK to confirm");
+    var passwordChr = []
     var password = []
 
   if (specialIf === true && numbersIf === true && lowercaseIf === true && capitalIf === true) {
     var passwordChr = specialChr.concat(numbersChr, lowercaseChr, capitalChr);
-    var i;
     console.log(numberofCharacters)
     for (i = 0; i < numberofCharacters; i++) {
       password.push(passwordChr[Math.floor(Math.random() * 95)]);
     }
     console.log(password)
+    console.log(passwordChr)
+    
   } else {
       console.log("Fail");
   }
