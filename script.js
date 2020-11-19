@@ -23,9 +23,9 @@ function writePassword() {
     return
   }
   
-  //if the user enters a string, boolean, or null
+  //if the user enters anything else
   if (isNaN(numberofCharacters) === true) {
-    alert("Invalid Input");
+    alert("Invalid Input: Please provide Password length as a number.");
     return
   }
 
@@ -34,25 +34,48 @@ function writePassword() {
     var numberofCharacters = Math.round(numberofCharacters);
     console.log(numberofCharacters)
 
-    var specialIf = confirm("Would you like to include special characters? Click OK to confirm");
-    var numbersIf = confirm("Would you like to include numbers? Click OK to confirm");
-    var lowercaseIf = confirm("Would you like to include lowercase letters? Click OK to confirm");
-    var capitalIf = confirm("Would you like to include capital letters? Click OK to confirm");
+    var specialIf = confirm("Would you like to include special characters? Click OK to confirm.");
+    var numbersIf = confirm("Would you like to include numbers? Click OK to confirm.");
+    var lowercaseIf = confirm("Would you like to include lowercase letters? Click OK to confirm.");
+    var capitalIf = confirm("Would you like to include capital letters? Click OK to confirm.");
+
     var passwordChr = []
     var password = []
 
-  if (specialIf === true && numbersIf === true && lowercaseIf === true && capitalIf === true) {
-    var passwordChr = specialChr.concat(numbersChr, lowercaseChr, capitalChr);
-    console.log(numberofCharacters)
-    for (i = 0; i < numberofCharacters; i++) {
-      password.push(passwordChr[Math.floor(Math.random() * 95)]);
+    //Alert to display if the user does not confirm any characters
+    if (specialIf === false && numbersIf === false && lowercaseIf === false && capitalIf === false) {
+      alert("Please select at least one type of character to include in your Password.");
+      return
     }
-    console.log(password)
-    console.log(passwordChr)
+
+    //Concat special character array into passwordChr array if the user confirmed special characters
+    if (specialIf === true) {
+      var passwordChr = passwordChr.concat(specialChr);
+      console.log("Pass 1: " + passwordChr)
+
+    }
+
+    //Concat number array into passwordChr array if the user confirmed numbers
+    if (numbersIf === true) {
+      var passwordChr = passwordChr.concat(numbersChr);
+      console.log("Pass 2: " + passwordChr)
+
+    }
     
-  } else {
-      console.log("Fail");
-  }
+    //Concat lowercase letter array into passwordChr array if the user confirmed lowercase letters
+    if (lowercaseIf === true) {
+      var passwordChr = passwordChr.concat(lowercaseChr);
+      console.log("Pass 3: " + passwordChr)
+
+    }
+
+    //Concat capital letter array into passwordChr array if the user confirmed capital letters
+    if (capitalIf === true) {
+      var passwordChr = passwordChr.concat(capitalChr);
+      console.log("Pass 4: " + passwordChr)
+
+    }
+  
 }
 }
 
