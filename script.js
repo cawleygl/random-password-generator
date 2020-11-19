@@ -14,25 +14,25 @@ var capitalChr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M
 function writePassword() {
   var numberofCharacters = prompt("How many characters would you like your password to contain? \n(Minimum: 8, Maximum: 128)")
 
-  //if the user enters a number smaller than 8
+  //Alert if the user enters a number smaller than 8
   if (numberofCharacters < 8) {
     alert("Your Password needs to contain at least 8 characters.");
     return
   }
   
-  //if the user enters a number larger than 128
+  //Alert if the user enters a number larger than 128
   if (numberofCharacters > 128) {
     alert("Your Password needs to contain 128 or fewer characters.");
     return
   }
   
-  //if the user enters anything else
+  //Alert if the user enters anything other than a number
   if (isNaN(numberofCharacters) === true) {
     alert("Invalid Input: Please provide Password length as a number.");
     return
   }
 
-  //if the user enters a number between 8 and 128
+  //Continue if the user enters a number between 8 and 128
   if (numberofCharacters < 129 && numberofCharacters > 7){
     var numberofCharacters = Math.round(numberofCharacters);
 
@@ -51,39 +51,43 @@ function writePassword() {
 
     }
 
-    var finalConfirm = confirm("Your Password will contain " + numberofCharacters + " characters, and include:" + "\nSpecial Characters: " + specialIf + "\nNumbers: " + numbersIf + "\nLowercase Letters: " + lowercaseIf + "\nCapital Letters: " + capitalIf + "\nWould you like to continue? Click OK to confirm.")
+    //Show the user their choices and ask to confirm them one last time
+    var finalConfirm = confirm("Your Password will contain " + numberofCharacters + " characters, and include:" + "\nSpecial Characters: " + specialIf + "\nNumbers: " + numbersIf + "\nLowercase Letters: " + lowercaseIf + "\nCapital Letters: " + capitalIf + "\nWould you like to continue? Click OK to confirm.");
 
     if (finalConfirm === true) {
     //Concat special character array into passwordChr array if the user confirmed special characters
-    if (specialIf === true) {
-      var passwordChr = passwordChr.concat(specialChr);
-    }
+      if (specialIf === true) {
+        var passwordChr = passwordChr.concat(specialChr);
+      }
 
-    //Concat number array into passwordChr array if the user confirmed numbers
-    if (numbersIf === true) {
-      var passwordChr = passwordChr.concat(numbersChr);
-    }
+      //Concat number array into passwordChr array if the user confirmed numbers
+      if (numbersIf === true) {
+        var passwordChr = passwordChr.concat(numbersChr);
+      }
     
-    //Concat lowercase letter array into passwordChr array if the user confirmed lowercase letters
-    if (lowercaseIf === true) {
-      var passwordChr = passwordChr.concat(lowercaseChr);
+      //Concat lowercase letter array into passwordChr array if the user confirmed lowercase letters
+      if (lowercaseIf === true) {
+        var passwordChr = passwordChr.concat(lowercaseChr);
+      }
+
+      //Concat capital letter array into passwordChr array if the user confirmed capital letters
+      if (capitalIf === true) {
+        var passwordChr = passwordChr.concat(capitalChr);
+      }
+
+      //Return a random character in the concatenated array, and add it to the blank password array. Loop once for the number of characters that the user specified.
+      for (i = 0; i < numberofCharacters; i++) {
+        password.push(passwordChr[Math.floor(Math.random() * passwordChr.length)]);
+      }
+
+    //return if the user doesn't confirm their choices
+    } else {
+      return
     }
 
-    //Concat capital letter array into passwordChr array if the user confirmed capital letters
-    if (capitalIf === true) {
-      var passwordChr = passwordChr.concat(capitalChr);
-    }
+    //Access text box in html, join the password array into one string, and write the new password over the placeholder text
+    var passwordText = document.querySelector("#password");
+    passwordText.value = password.join("");
 
-    for (i = 0; i < numberofCharacters; i++) {
-      password.push(passwordChr[Math.floor(Math.random() * passwordChr.length)]);
-    }
-  } else {
-    return
   }
-
-  //Access text box in html, join the password array into one string, and write the new password over the placeholder text
-  var passwordText = document.querySelector("#password");
-  passwordText.value = password.join("");
-
-}
 }
