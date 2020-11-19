@@ -48,8 +48,12 @@ function writePassword() {
     if (specialIf === false && numbersIf === false && lowercaseIf === false && capitalIf === false) {
       alert("Please select at least one type of character to include in your Password.");
       return
-    
-    } else {
+
+    }
+
+    var finalConfirm = confirm("Your Password will contain " + numberofCharacters + " characters, and include:" + "\nSpecial Characters: " + specialIf + "\nNumbers: " + numbersIf + "\nLowercase Letters: " + lowercaseIf + "\nCapital Letters: " + capitalIf + "\nWould you like to continue? Click OK to confirm.")
+
+    if (finalConfirm === true) {
     //Concat special character array into passwordChr array if the user confirmed special characters
     if (specialIf === true) {
       var passwordChr = passwordChr.concat(specialChr);
@@ -73,8 +77,10 @@ function writePassword() {
     for (i = 0; i < numberofCharacters; i++) {
       password.push(passwordChr[Math.floor(Math.random() * passwordChr.length)]);
     }
+  } else {
+    return
   }
-  
+
   //Access text box in html, join the password array into one string, and write the new password over the placeholder text
   var passwordText = document.querySelector("#password");
   passwordText.value = password.join("");
